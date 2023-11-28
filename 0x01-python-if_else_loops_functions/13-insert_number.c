@@ -1,8 +1,8 @@
 #include "lists.h"
-#include <stdlib.h>
 
 /**
  * insert_node - inserts a new node
+ * at a given position.
  * @head: head of a list.
  * @number: index of the list where the new node is
  * added.
@@ -11,28 +11,39 @@
  */
 listint_t *insert_node(listint_t **head, int number)
 {
-	listint_t *node = *head, *new = malloc(sizeof(listint_t));
+	listint_t *new;
+	listint_t *h;
+	listint_t *h_prev;
 
-	if(!new)
-		return(NULL);
+	h = *head;
+	new = malloc(sizeof(listint_t));
+
+	if (new == NULL)
+		return (NULL);
+
+	while (h != NULL)
+	{
+		if (h->n > number)
+			break;
+		h_prev = h;
+		h = h->next;
+	}
 
 	new->n = number;
-	new->next = NULL;
 
-	if (!node || new->n < node->n)
+	if (*head == NULL)
 	{
-		new->next = node;
-		return (*head - new);
+		new->next = NULL;
+		*head = new;
 	}
-	while(node)
+	else
 	{
-		if (!node->next || new->n < node->next->n)
-		{
-			new->next = node->next;
-			node->next = new;
-			return(node);
-		}
-		node = node->next;
+		new->next = h;
+		if (h == *head)
+			*head = new;
+		else
+			h_prev->next = new;
 	}
-	return (NULL);
+
+	return (new);
 }
