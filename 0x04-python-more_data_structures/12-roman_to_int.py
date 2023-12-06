@@ -25,7 +25,7 @@ def roman_to_int(roman_string):
     li_num = [0]
 
     for ch in roman_string:
-        for r_num in list_keys:
+        for r_num in li_keys:
             if r_num == ch:
                 if rom_n.get(ch) <= last_rom:
                     num += to_subtract(li_num)
