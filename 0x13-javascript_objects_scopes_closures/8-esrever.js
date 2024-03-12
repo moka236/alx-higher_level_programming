@@ -6,7 +6,7 @@ exports.esrever = function (list) {
     const ars = list[leng];
     list[leng] = list[n];
     list[n] = ars;
-    i++;
+    n++;
     leng--;
   }
   return list;
